@@ -1,0 +1,130 @@
+/* Common button base style for all */
+.jfx-button {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 16px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0.2, 0, 2);
+    -jfx-button-type: RAISED;
+    -fx-border-width: 0;
+}
+
+/* Add Button – teal/blue blend (friendly, positive action) */
+#addBtn {
+    -fx-background-color: linear-gradient(to bottom, #40739e, #44bd32);
+}
+#loadTableButton {
+    -fx-background-color: linear-gradient(to bottom, #8c7ae6, #718093);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px 16px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0.2, 0, 2);
+    -jfx-button-type: RAISED;
+}
+
+#addBtn:hover {
+    -fx-background-color: linear-gradient(to bottom, #4cd137, #44bd32);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+#addBtn:pressed {
+    -fx-background-color: #3c6382;
+}
+
+/* Delete Button – red/purple contrast */
+#deleteBtn {
+    -fx-background-color: linear-gradient(to bottom, #c23616, #e84118);
+}
+#deleteBtn:hover {
+    -fx-background-color: linear-gradient(to bottom, #e55039, #eb2f06);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+#deleteBtn:pressed {
+    -fx-background-color: #a93226;
+}
+
+/* Update Button – royal blue mix (fits perfectly with #192a56 theme) */
+#updateBtn {
+    -fx-background-color: linear-gradient(to bottom, #273c75, #40739e);
+}
+#updateBtn:hover {
+    -fx-background-color: linear-gradient(to bottom, #40739e, #487eb0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+#updateBtn:pressed {
+    -fx-background-color: #192a56;
+}
+
+/* Search Button – clean cyan/sky blend (contrasts the dark background) */
+#searchById {
+    -fx-background-color: linear-gradient(to bottom, #00a8ff, #0097e6);
+}
+#searchById:hover {
+    -fx-background-color: linear-gradient(to bottom, #0097e6, #00bfff);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+#searchById:pressed {
+    -fx-background-color: #273c75;
+}
+#loadTableButton:hover {
+    -fx-background-color: linear-gradient(to bottom, #9c88ff, #8c7ae6);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+#loadTableButton:pressed {
+    -fx-background-color: #273c75;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+#cartBtn {
+    -fx-background-color: linear-gradient(to bottom, #44bd32, #4cd137);
+}
+#cartBtn:hover {
+    -fx-background-color: linear-gradient(to bottom, #4cd137, #6ab04c);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+#cartBtn:pressed {
+    -fx-background-color: #3c6382;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+/* ❌ Remove Button */
+#removeBtn {
+    -fx-background-color: linear-gradient(to bottom, #e84118, #c23616);
+}
+#removeBtn:hover {
+    -fx-background-color: linear-gradient(to bottom, #ff5e3a, #e55039);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+#removeBtn:pressed {
+    -fx-background-color: #a93226;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}
+
+/* 📦 Place Order Button */
+#placeOrderBtn {
+    -fx-background-color: linear-gradient(to bottom, #273c75, #40739e);
+}
+#placeOrderBtn:hover {
+    -fx-background-color: linear-gradient(to bottom, #40739e, #487eb0);
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+}
+#placeOrderBtn:pressed {
+    -fx-background-color: #192a56;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}

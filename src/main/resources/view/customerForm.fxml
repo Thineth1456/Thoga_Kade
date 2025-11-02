@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="503.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerFormController">
+    <children>
+
+        <TableView fx:id="cusTable" layoutX="88.0" layoutY="228.0" onMouseClicked="#mousePressed" onMousePressed="#selectRow" prefHeight="214.0" prefWidth="440.0" stylesheets="@../css/style.css">
+            <columns>
+                <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="colName" prefWidth="110.4000244140625" text="Name" />
+                <TableColumn fx:id="colAddress" prefWidth="127.199951171875" text="Address" />
+                <TableColumn fx:id="colSalary" prefWidth="127.199951171875" text="Salary" />
+            </columns>
+        </TableView>
+      <JFXTextField fx:id="cusId" layoutX="59.0" layoutY="43.0" prefHeight="26.0" prefWidth="135.0" promptText="ID" />
+      <JFXTextField fx:id="cusName" layoutX="275.0" layoutY="43.0" prefHeight="26.0" prefWidth="142.0" promptText="Name" />
+      <JFXTextField fx:id="cusAddress" layoutX="460.0" layoutY="43.0" promptText="Address" />
+      <JFXTextField fx:id="cusSalary" layoutX="59.0" layoutY="103.0" promptText="Salary" />
+      <JFXButton fx:id="searchById" layoutX="251.0" layoutY="165.0" onAction="#searchButtonOnAction" stylesheets="@../css/dele_add__style.css" text="Search" />
+      <JFXButton fx:id="updateBtn" layoutX="335.0" layoutY="165.0" onAction="#updateButtonOnAction" stylesheets="@../css/dele_add__style.css" text="Update" />
+      <JFXButton fx:id="deleteBtn" layoutX="427.0" layoutY="165.0" onAction="#deleteButtonOnAction" stylesheets="@../css/dele_add__style.css" text="Delete" />
+      <JFXButton fx:id="addBtn" layoutX="510.0" layoutY="165.0" onAction="#addButtonOnAction" stylesheets="@../css/dele_add__style.css" text="Add" />
+    </children>
+
+</AnchorPane>

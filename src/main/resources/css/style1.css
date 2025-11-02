@@ -1,0 +1,26 @@
+.jfx-button {
+    -fx-background-color: linear-gradient(to bottom, #273c75, #40739e);
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-padding: 8px 16px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0.2, 0, 2);
+    -jfx-button-type: RAISED; /* Optional if you use JFoenix */
+}
+
+/* Hover effect */
+.jfx-button:hover {
+    -fx-background-color: linear-gradient(to bottom, #40739e, #487eb0);
+    -fx-scale-x: 1.03;
+    -fx-scale-y: 1.03;
+}
+
+/* Pressed effect */
+.jfx-button:pressed {
+    -fx-background-color: #192a56;
+    -fx-effect: none;
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FinalDashBoardController">
+    <children>
+        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="linear-gradient(to bottom right, #192a56, #273c75, #40739e)" height="83.0" stroke="0c1d3a" strokeType="INSIDE" strokeWidth="0.9" width="787.0" />
+        <Label fx:id="MainLiable" contentDisplay="CENTER" layoutX="315.0" layoutY="18.0" prefHeight="58.0" prefWidth="326.0" text="Dashboard Form" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+        <Rectangle fx:id="horiZontalRec" arcHeight="5.0" arcWidth="5.0" fill="linear-gradient(to bottom right, #192a56, #273c75, #40739e)" height="553.0" layoutX="-4.0" layoutY="82.0" stroke="#0c1d3a" strokeType="INSIDE" strokeWidth="0.1" width="226.0" />
+
+        <AnchorPane fx:id="root" layoutX="219.0" layoutY="80.0" prefHeight="553.0" prefWidth="568.0" />
+      <JFXButton fx:id="orderbtn" layoutX="51.0" layoutY="404.0" onAction="#orderBtnOnAction" prefHeight="31.0" prefWidth="134.0" stylesheets="@../css/style1.css" text="Order" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="dashbtn" layoutX="51.0" layoutY="235.0" onAction="#DashBtnOnAction" prefHeight="31.0" prefWidth="133.0" stylesheets="@../css/style1.css" text="Dashboard" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="itemBtn" layoutX="51.0" layoutY="347.0" onAction="#itmBtnOnAction" prefHeight="31.0" prefWidth="134.0" stylesheets="@../css/style1.css" text="Item" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="customerBtn" layoutX="50.0" layoutY="295.0" onAction="#cusBtnOnAction" prefHeight="31.0" prefWidth="134.0" stylesheets="@../css/style1.css" text="Customer" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="aboutUsBtn" layoutX="51.0" layoutY="461.0" onAction="#aboutUsBtnOnAction" prefHeight="31.0" prefWidth="134.0" stylesheets="@../css/style1.css" text="About us" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+      <Label fx:id="lblDate" layoutX="676.0" layoutY="14.0" prefHeight="22.0" prefWidth="109.0" text="dd/mm/yyyy" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblTime" layoutX="677.0" layoutY="48.0" prefHeight="22.0" prefWidth="109.0" text="00:00:00" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="31.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/shop.png" />
+         </image>
+      </ImageView>
+    </children>
+
+
+</AnchorPane>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="522.0" prefWidth="567.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.OrderFormController">
+   <children>
+      <JFXTextField fx:id="txtCusName" editable="false" layoutX="75.0" layoutY="89.0" promptText="Name" />
+      <JFXComboBox fx:id="combCustomer" layoutX="24.0" layoutY="61.0" onMouseClicked="#getSelectValue" prefHeight="22.0" prefWidth="90.0" promptText="Customer ID" />
+      <JFXTextField fx:id="txtAddress" editable="false" layoutX="237.0" layoutY="89.0" promptText="Address" />
+      <JFXTextField fx:id="txtSalary" editable="false" layoutX="409.0" layoutY="89.0" promptText="Salary" />
+      <JFXComboBox fx:id="comBItem" layoutX="24.0" layoutY="138.0" prefHeight="22.0" prefWidth="90.0" promptText="Item code" />
+      <JFXTextField fx:id="txtDescription" editable="false" layoutX="69.0" layoutY="167.0" prefHeight="26.0" prefWidth="186.0" promptText="Description" />
+      <JFXTextField fx:id="txtQtyOnHand" editable="false" layoutX="274.0" layoutY="167.0" prefHeight="26.0" prefWidth="75.0" promptText="Stoke" />
+      <JFXTextField fx:id="txtUnitPrice" editable="false" layoutX="409.0" layoutY="167.0" promptText="Unit Price" />
+      <JFXButton fx:id="cartBtn" layoutX="438.0" layoutY="202.0" onAction="#addToCartBtnOnAction" prefHeight="35.0" prefWidth="105.0" stylesheets="@../css/dele_add__style.css" text="Add to Cart">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="txtQuantity" layoutX="380.0" layoutY="212.0" prefHeight="26.0" prefWidth="58.0" promptText="Qty" />
+      <TableView fx:id="orderTbl" layoutX="38.0" layoutY="245.0" onMouseClicked="#selectRow" prefHeight="200.0" prefWidth="494.0" stylesheets="@../css/style.css">
+        <columns>
+          <TableColumn fx:id="colCode" prefWidth="75.0" text="Item code" />
+          <TableColumn fx:id="colDes" prefWidth="154.3999786376953" text="description" />
+            <TableColumn fx:id="colUPrice" minWidth="0.0" prefWidth="81.5999755859375" text="unit price" />
+            <TableColumn fx:id="colQty" prefWidth="72.79998779296875" text="Qty" />
+            <TableColumn fx:id="colTotal" prefWidth="106.4000244140625" text="Total" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="placeOrderBtn" layoutX="449.0" layoutY="459.0" onAction="#placeOrderBtnOnAction" prefHeight="35.0" prefWidth="106.0" stylesheets="@../css/dele_add__style.css" text="Place Order">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="38.0" layoutY="464.0" prefHeight="26.0" prefWidth="75.0" text="Net Total :" textFill="#ff4757">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblNetPrice" layoutX="143.0" layoutY="464.0" prefHeight="26.0" prefWidth="75.0" text="0.0" textFill="#ff4757">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="removeBtn" layoutX="349.0" layoutY="459.0" onAction="#removeCartBtnOnAction" prefHeight="35.0" prefWidth="90.0" stylesheets="@../css/dele_add__style.css" text="Remove ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>
