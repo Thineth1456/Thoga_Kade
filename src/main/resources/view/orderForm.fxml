@@ -54,5 +54,6 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
+      <JFXTextField fx:id="orderId" layoutX="238.0" layoutY="464.0" prefHeight="26.0" prefWidth="90.0" />
    </children>
 </AnchorPane>

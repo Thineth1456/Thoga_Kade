@@ -13,9 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import model.Customer;
-import model.Item;
-import model.OrderTM;
+import model.*;
 import service.ServiceFactory;
 import service.SuperService;
 import service.custom.CustomerService;
@@ -26,12 +24,14 @@ import util.ServiceEnum;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class OrderFormController implements Initializable {
 
     public JFXButton removeBtn;
+    public JFXTextField orderId;
     @FXML
     private TableColumn<?, ?> colCode;
 
@@ -102,8 +102,22 @@ public class OrderFormController implements Initializable {
 
     @FXML
     void placeOrderBtnOnAction(ActionEvent event) {
+        String orderIds = orderId.getText();
+        Date orderDate = new Date();
+        String customerId = combCustomer.getValue().toString();
 
+        ArrayList<OrderDetail> orderDetails = new ArrayList<>();
 
+        cartList.forEach(orders->{
+            orderDetails.add(new OrderDetail(orderIds,
+                            orders.getCode(),
+                            orders.getQty(),
+                            orders.getUnitPrice())
+                    );
+        });
+
+        Order order = new Order(orderIds,orderDate,customerId,orderDetails);
+        System.out.println(order);
     }
 
     void setCustomerCombValue(){
