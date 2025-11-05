@@ -18,6 +18,7 @@ import service.ServiceFactory;
 import service.SuperService;
 import service.custom.CustomerService;
 import service.custom.ItemService;
+import service.custom.OrderService;
 import service.custom.impl.CustomerServiceImpl;
 import util.ServiceEnum;
 
@@ -82,6 +83,7 @@ public class OrderFormController implements Initializable {
 
     CustomerService service = ServiceFactory.getInstance().getFactory(ServiceEnum.CUSTOMER);
     ItemService itmService = ServiceFactory.getInstance().getFactory(ServiceEnum.ITEM);
+    OrderService orderService = ServiceFactory.getInstance().getFactory(ServiceEnum.ORDER);
     //CustomerService service =  new CustomerServiceImpl();
     ArrayList<OrderTM> cartList = new ArrayList<>();
     @FXML
@@ -118,7 +120,13 @@ public class OrderFormController implements Initializable {
 
         Order order = new Order(orderIds,orderDate,customerId,orderDetails);
         System.out.println(order);
+        orderService.addVouchers(order.getCustomerId(),Double.parseDouble(lblNetPrice.getText()),order.getOrderId());
+
+
     }
+
+
+
 
     void setCustomerCombValue(){
         try {
