@@ -1,13 +1,9 @@
 package repository.custom.impl;
 
-import db.DBConnection;
 import model.Customer;
 import repository.custom.CustomerRepository;
 import util.CrudUtil;
-import util.CrudUtil1;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

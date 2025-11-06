@@ -59,20 +59,25 @@ public class CustomerFormController implements Initializable {
     @FXML
     void addButtonOnAction(ActionEvent event) {
         try {
-            service.save(new Customer(cusId.getText(),
-                                        cusName.getText(),
-                                        cusAddress.getText(),
-                                        Double.parseDouble(cusSalary.getText())));
+            Customer c1 = new Customer(cusId.getText(),
+                    cusName.getText(),
+                    cusAddress.getText(),
+                    Double.parseDouble(cusSalary.getText()));
+            service.save(c1);
+            System.out.println(c1);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         loadTable();
+
+
+
     }
 
     @FXML
     void deleteButtonOnAction(ActionEvent event) {
         try {
-            service.delete(cusId.getText());
+           service.delete(cusId.getText());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -107,8 +112,9 @@ public class CustomerFormController implements Initializable {
         }
         loadTable();
     }
-    //CustomerService service = ServiceFactory.getInstance().getFactory(ServiceEnum.CUSTOMER);;
-    CustomerService service = ServiceFactory.getInstance().getFactory(ServiceEnum.CUSTOMER);
+    CustomerService service = ServiceFactory.getInstance().getFactory(ServiceEnum.CUSTOMER);;
+    //CustomerService service = ServiceFactory.getInstance().getFactory(ServiceEnum.CUSTOMER);
+    //CustomerService service = new CustomerServiceImpl();
     ObservableList<Customer> customerObservableList;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

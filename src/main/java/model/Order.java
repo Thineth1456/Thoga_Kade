@@ -15,6 +15,13 @@ import java.util.Date;
 public class Order {
     private String orderId;
     private Date orderDate;
+
+    public Order(String orderId, Date orderDate, String customerId) {
+        this.orderId = orderId;
+        this.orderDate = orderDate;
+        this.customerId = customerId;
+    }
+
     private String customerId;
     private ArrayList<OrderDetail> orderDetails;
 }

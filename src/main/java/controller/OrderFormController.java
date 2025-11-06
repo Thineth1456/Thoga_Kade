@@ -33,6 +33,7 @@ public class OrderFormController implements Initializable {
 
     public JFXButton removeBtn;
     public JFXTextField orderId;
+    public Label lblOrderId;
     @FXML
     private TableColumn<?, ?> colCode;
 
@@ -139,6 +140,11 @@ public class OrderFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            lblOrderId.setText(orderService.generateOrderId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         removeBtn.setVisible(false);
 
         setCustomerCombValue();
