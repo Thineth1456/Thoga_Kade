@@ -105,7 +105,7 @@ public class OrderFormController implements Initializable {
 
     @FXML
     void placeOrderBtnOnAction(ActionEvent event) {
-        String orderIds = orderId.getText();
+        String orderIds = lblOrderId.getText();
         Date orderDate = new Date();
         String customerId = combCustomer.getValue().toString();
 

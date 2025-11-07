@@ -12,11 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
-    OrderRepository repository;
+    OrderRepository repository =repositoryFactory.getInstance().getFactoryType(RepositoryType.ORDER);;
     ArrayList<Voucher> voucherArray = new ArrayList<>();
     @Override
     public boolean addVouchers(String cusId, double netTotal, String orderId) {
-        repositoryFactory.getInstance().getFactoryType(RepositoryType.ORDER);
+
 
         if (netTotal>=10000){
             int voucherCount = (int)(netTotal/10000);
