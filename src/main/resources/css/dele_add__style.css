@@ -147,3 +147,59 @@
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }
+
+#cmbVoucher {
+    -fx-background-color: linear-gradient(to right, #273c75, #40739e);
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI", "Roboto", sans-serif;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: rgba(255, 255, 255, 0.2);
+    -fx-border-width: 1px;
+    -fx-padding: 4px 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 5, 0.2, 0, 2);
+}
+
+/* 🔽 Drop arrow button */
+#cmbVoucher .arrow-button {
+    -fx-background-color: linear-gradient(to bottom, #40739e, #487eb0);
+    -fx-background-radius: 0 8px 8px 0;
+}
+#cmbVoucher .arrow-button:hover {
+    -fx-background-color: #487eb0;
+}
+
+/* 📋 Dropdown list */
+#cmbVoucher .list-cell {
+    -fx-background-color: #273c75;
+    -fx-text-fill: white;
+}
+#cmbVoucher .list-cell:hover {
+    -fx-background-color: #40739e;
+}
+#cmbVoucher .list-cell:selected {
+    -fx-background-color: #192a56;
+    -fx-text-fill: #f5f6fa;
+}
+
+/* ✨ Hover/focus effects */
+#cmbVoucher:hover,
+#cmbVoucher:focused {
+    -fx-background-color: linear-gradient(to right, #40739e, #487eb0);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+}
+
+/* 💬 Prompt text styling — NOT WHITE */
+#cmbVoucher .text-field,
+#cmbVoucher .combo-box-display-node .text {
+    -fx-prompt-text-fill: #b2bec3; /* soft gray-blue, readable but distinct */
+    -fx-text-fill: white;          /* actual selected text remains white */
+}
+
+/* Optional — when combo is empty */
+#cmbVoucher:empty .text-field {
+    -fx-text-fill: #b2bec3;
+}

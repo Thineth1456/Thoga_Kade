@@ -25,6 +25,7 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public boolean save(Customer customer) throws SQLException {
         return repository.save(customer);
+
     }
 
     @Override

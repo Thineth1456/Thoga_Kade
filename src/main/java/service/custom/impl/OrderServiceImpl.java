@@ -13,34 +13,40 @@ import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
     OrderRepository repository =repositoryFactory.getInstance().getFactoryType(RepositoryType.ORDER);;
-    ArrayList<Voucher> voucherArray = new ArrayList<>();
+
+
     @Override
-    public boolean addVouchers(String cusId, double netTotal, String orderId) {
+    public boolean placeOrder(Order order) throws SQLException {
+        System.out.println("service : "+order);
+        return repository.save(order);
+    }
+
+    // ArrayList<Voucher> voucherArray = new ArrayList<>();
+    @Override
+    public boolean addVouchers(String cusId, double netTotal, String orderId) throws SQLException {
 
 
-        if (netTotal>=10000){
-            int voucherCount = (int)(netTotal/10000);
+        if (netTotal>=20000){
+            int voucherCount = (int)(netTotal/20000);
             while (voucherCount>0){
                 String id = generateVoucherId();
-                voucherArray.add(new Voucher(id,cusId,orderId,10.0));
+                Voucher voucher = new Voucher(id, cusId, orderId, 10.0);
+                repository.saveVoucher(voucher);
                 voucherCount--;
 
 
             }
-
-
-            System.out.println(voucherArray);
         }
         return false;
     }
 
-    String generateVoucherId(){
+    String generateVoucherId() throws SQLException {
         ArrayList<String> VoucherId = new ArrayList<>();
-
-        if (voucherArray.isEmpty()){
+        List<Voucher> allVouchers = repository.getAllVouchers();
+        if (allVouchers.isEmpty()){
             return "V001";
         }
-        String lstId = voucherArray.get(voucherArray.size()-1).getId();
+        String lstId = allVouchers.get(allVouchers.size()-1).getId();
         int num = Integer.parseInt(lstId.substring(1));
         num++;
         return String.format("V%03d",num);
@@ -56,9 +62,28 @@ public class OrderServiceImpl implements OrderService {
         return String.format("D%03d",num);
     }
 
+    @Override
+    public List<String> getVouchersByCustomer(String customerId) throws SQLException {
+        ArrayList<String> customerVoucher  = new ArrayList<>();
+        repository.getAllVouchers().forEach(voucher -> {
+            if (voucher.getCustomerId().equals(customerId)){
+                customerVoucher.add(voucher.getId());
+            }
+        });
+        return customerVoucher;
+    }
+
+    @Override
+    public boolean deleteVoucher(String id) throws SQLException {
+        return repository.deleteVoucher(id);
+    }
+
     List<Order> getAll() throws SQLException {
         return repository.getAll();
     }
+
+
+
 
 
 }

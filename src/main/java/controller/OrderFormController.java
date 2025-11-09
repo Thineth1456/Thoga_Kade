@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -34,6 +35,7 @@ public class OrderFormController implements Initializable {
     public JFXButton removeBtn;
     public JFXTextField orderId;
     public Label lblOrderId;
+    public JFXComboBox cmbVoucher;
     @FXML
     private TableColumn<?, ?> colCode;
 
@@ -120,8 +122,31 @@ public class OrderFormController implements Initializable {
         });
 
         Order order = new Order(orderIds,orderDate,customerId,orderDetails);
-        System.out.println(order);
-        orderService.addVouchers(order.getCustomerId(),Double.parseDouble(lblNetPrice.getText()),order.getOrderId());
+        try {
+            orderService.addVouchers(order.getCustomerId(),Double.parseDouble(lblNetPrice.getText()),order.getOrderId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        if (voucherId!=null){
+            try {
+                orderService.deleteVoucher(voucherId);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+        try {
+            if (orderService.placeOrder(order)){
+                new Alert(Alert.AlertType.INFORMATION,"Order Completed").show();
+            }
+            else {
+                new Alert(Alert.AlertType.ERROR,"Order Not Completed").show();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
 
     }
@@ -199,6 +224,12 @@ public class OrderFormController implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        try {
+            cmbVoucher.setItems(FXCollections.observableArrayList(orderService.getVouchersByCustomer(newValue)));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void getSelectValue(MouseEvent mouseEvent) {
@@ -208,12 +239,13 @@ public class OrderFormController implements Initializable {
    void getCustomerId(MouseEvent mouseEvent){
 
    }
-   void calNetTotal(){
+   double calNetTotal(){
         Double netTotal = 0.0;
         for (OrderTM orderTM:cartList){
             netTotal += orderTM.getTotal();
         }
         lblNetPrice.setText(netTotal.toString());
+       return netTotal;
    }
 
     public void removeCartBtnOnAction(ActionEvent actionEvent) {
@@ -233,6 +265,26 @@ public class OrderFormController implements Initializable {
         System.out.println(selectedItem);
 
 
+    }
+
+    public void selectCustomerOnAction(ActionEvent actionEvent) {
+        cmbVoucher.getSelectionModel().selectedItemProperty().addListener((observableValue,oldValue,newValue)->{
+            if (newValue!=null){
+                addDiscount((String)newValue);
+            }
+        });
+    }
+    String voucherId;
+    private void addDiscount(String value) {
+        Double netTotal = calNetTotal();
+        if(netTotal>10000){
+            netTotal = netTotal - 1000;
+        }
+        else{
+            netTotal = netTotal-netTotal*0.1;
+        }
+        lblNetPrice.setText(netTotal.toString());
+        voucherId = value;
     }
 }
 
