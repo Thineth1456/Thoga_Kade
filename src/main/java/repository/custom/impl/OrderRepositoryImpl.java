@@ -4,8 +4,11 @@ import db.DBConnection;
 import model.Order;
 import model.OrderDetail;
 import model.Voucher;
+import repository.custom.ItemRepository;
 import repository.custom.OrderRepository;
+import repository.repositoryFactory;
 import util.CrudUtil;
+import util.RepositoryType;
 
 import java.nio.Buffer;
 import java.sql.Connection;
@@ -16,23 +19,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OrderRepositoryImpl implements OrderRepository {
+
+    ItemRepository itemRepository = repositoryFactory.getInstance().getFactoryType(RepositoryType.ITEM);
     @Override
     public boolean save(Order order) throws SQLException {
         Connection connection = DBConnection.getInstance().getConnection();
-
-        PreparedStatement psTM = connection.prepareStatement("INSERT INTO orders VALUES(?,?,?)");
-        psTM.setObject(1,order.getOrderId());
-        psTM.setObject(2,order.getOrderDate());
-        psTM.setObject(1,order.getCustomerId());
-        if (psTM.executeUpdate()>0){
-            boolean isTrue = OrderDetailRepositoryImpl.getInstance().saveOrderDetail(order.getOrderDetails());
-            if (isTrue){
-
+        connection.setAutoCommit(false);
+        try {
+            PreparedStatement psTM = connection.prepareStatement("INSERT INTO orders VALUES(?,?,?)");
+            psTM.setObject(1,order.getOrderId());
+            psTM.setObject(2,order.getOrderDate());
+            psTM.setObject(3,order.getCustomerId());
+            if (psTM.executeUpdate()>0){
+                boolean isTrue = OrderDetailRepositoryImpl.getInstance().saveOrderDetail(order.getOrderDetails());
+                if (isTrue){
+                    boolean isUpdated = itemRepository.updateStock(order.getOrderDetails());
+                    if (isUpdated){
+                        connection.commit();
+                        return true;
+                    }
+                }
             }
-        }
 
-        System.out.println("Repository : "+order);
-        return false;
+            connection.rollback();
+            return false;
+        }
+        finally {
+            connection.setAutoCommit(true);
+        }
     }
 
     @Override
