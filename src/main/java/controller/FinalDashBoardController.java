@@ -93,8 +93,13 @@ public class FinalDashBoardController implements Initializable {
         timeline.play();
     }
 
-    public void DashBtnOnAction(ActionEvent actionEvent) {
+    public void DashBtnOnAction(ActionEvent actionEvent) throws IOException {
+        MainLiable.setText("Email Form");
 
+        Parent load = FXMLLoader.load(getClass().getResource("../view/EmailForm.fxml"));
+        assert root!=null;
+        root.getChildren().clear();
+        root.getChildren().add(load);
     }
 
     public void ItmBtnOnAction(ActionEvent actionEvent) {

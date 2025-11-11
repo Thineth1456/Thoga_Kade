@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="503.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmailFormController">
+   <children>
+      <JFXTextArea fx:id="txtMsg" layoutX="75.0" layoutY="97.0" promptText="Enter your massage" />
+      <JFXTextField fx:id="txtEmail" layoutX="80.0" layoutY="354.0" prefHeight="26.0" prefWidth="347.0" promptText="Enter Email" />
+      <JFXButton layoutX="510.0" layoutY="438.0" onAction="#sendBtnOnAction" prefHeight="26.0" prefWidth="58.0" ripplerFill="#4d1989" text="Send" />
+   </children>
+</AnchorPane>
