@@ -1,15 +1,13 @@
 package controller;
 
+import com.jfoenix.controls.JFXTextField;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.Customer;
@@ -26,6 +24,9 @@ import java.util.ResourceBundle;
 
 public class CustomerFormController implements Initializable {
 
+    public JFXTextField cusEmail;
+
+    public Label lblCustomerId;
     @FXML
     private TableColumn colAddress;
 
@@ -42,13 +43,10 @@ public class CustomerFormController implements Initializable {
     private TextField cusAddress;
 
     @FXML
-    private TextField cusId;
+   private TextField cusId;
 
     @FXML
     private TextField cusName;
-
-    @FXML
-    private TextField cusSalary;
 
     @FXML
     private TableView cusTable;
@@ -59,18 +57,23 @@ public class CustomerFormController implements Initializable {
     @FXML
     void addButtonOnAction(ActionEvent event) {
         try {
-            Customer c1 = new Customer(cusId.getText(),
+            Customer c1 = new Customer(lblCustomerId.getText(),
                     cusName.getText(),
                     cusAddress.getText(),
-                    Double.parseDouble(cusSalary.getText()));
+                    cusEmail.getText());
             service.save(c1);
             System.out.println(c1);
+            new Alert(Alert.AlertType.ERROR,"Customer Added Successful");
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR,"Customer Added Not Successfully");
         }
         loadTable();
 
-
+        try {
+            lblCustomerId.setText(service.generateCustomerId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -82,6 +85,11 @@ public class CustomerFormController implements Initializable {
             throw new RuntimeException(e);
         }
         loadTable();
+        try {
+            lblCustomerId.setText(service.generateCustomerId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -94,7 +102,7 @@ public class CustomerFormController implements Initializable {
             cusId.setText(customer.getId());
             cusName.setText(customer.getName());
             cusAddress.setText(customer.getAddress());
-            cusSalary.setText(customer.getSalary().toString());
+            cusEmail.setText(customer.getEmail());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -106,7 +114,7 @@ public class CustomerFormController implements Initializable {
             service.update(new Customer(cusId.getText(),
                                         cusName.getText(),
                                         cusAddress.getText(),
-                                        Double.parseDouble(cusSalary.getText())));
+                                        cusEmail.getText()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -118,13 +126,19 @@ public class CustomerFormController implements Initializable {
     ObservableList<Customer> customerObservableList;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            lblCustomerId.setText(service.generateCustomerId());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
-        colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
+        colSalary.setCellValueFactory(new PropertyValueFactory<>("email"));
 
         loadTable();
     }
+
 
     public void loadTable(){
         try {

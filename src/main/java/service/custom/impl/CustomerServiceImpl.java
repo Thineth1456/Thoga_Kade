@@ -51,4 +51,14 @@ public class CustomerServiceImpl implements CustomerService {
         });
         return cusIds;
     }
+
+    public String generateCustomerId() throws SQLException {
+        if (getAll().isEmpty()){
+            return "C001";
+        }
+        String lstId = getAll().get(getAll().size()-1).getId();
+        int num = Integer.parseInt(lstId.substring(1));
+        num++;
+        return String.format("C%03d",num);
+    }
 }

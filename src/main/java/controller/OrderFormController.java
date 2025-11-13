@@ -220,7 +220,7 @@ public class OrderFormController implements Initializable {
             Customer customer = service.search(newValue);
             txtCusName.setText(customer.getName());
             txtAddress.setText(customer.getAddress());
-            txtSalary.setText(customer.getSalary().toString());
+            txtSalary.setText(customer.getEmail().toString());
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -14,17 +14,17 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Override
     public boolean save(Customer customer) throws SQLException {
-        return CrudUtil.execute("INSERT INTO Customer VALUES(?,?,?,?)", customer.getId(), customer.getName(), customer.getAddress(), customer.getSalary());
+        return CrudUtil.execute("INSERT INTO customerDetail VALUES(?,?,?,?)", customer.getId(), customer.getName(), customer.getAddress(), customer.getEmail());
     }
 
 
     @Override
     public List<Customer> getAll() throws SQLException {
 
-        ResultSet resultSet = CrudUtil.execute("SELECT * FROM customer");
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM customerDetail");
             ArrayList<Customer> customerList = new ArrayList<>();
             while (resultSet.next()){
-                Customer customer = new Customer(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getDouble(4));
+                Customer customer = new Customer(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4));
                 customerList.add(customer);
             }
 
@@ -34,18 +34,18 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
     @Override
     public boolean delete(String s) throws SQLException {
-       return CrudUtil.execute("DELETE FROM customer WHERE id = ?",s);
+       return CrudUtil.execute("DELETE FROM customerDetail WHERE id = ?",s);
     }
 
     @Override
     public Customer search(String s) throws SQLException {
-        ResultSet resultSet = CrudUtil.execute("SELECT * FROM customer WHERE id = ?",s);
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM customerDetail WHERE id = ?",s);
             resultSet.next();
-       return  new Customer(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getDouble(4));
+       return  new Customer(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4));
     }
 
     @Override
     public boolean update(Customer customer) throws SQLException {
-       return CrudUtil.execute("UPDATE customer SET name=?,address = ? salary = ? WHERE id = ?",customer.getName(),customer.getAddress(),customer.getSalary(),customer.getId());
+       return CrudUtil.execute("UPDATE customerDetail SET name=?,address = ? salary = ? WHERE id = ?",customer.getName(),customer.getAddress(),customer.getEmail(),customer.getId());
     }
 }
