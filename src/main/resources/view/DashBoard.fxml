@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="553.0" prefWidth="568.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashBoardController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5cbf80" height="120.0" layoutX="51.0" layoutY="45.0" stroke="BLACK" strokeType="INSIDE" width="144.0" />
+      <BarChart fx:id="lowerItemGraph" layoutX="48.0" layoutY="223.0" prefHeight="315.0" prefWidth="472.0" title="Lower Items">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <Label fx:id="customerCountlbl" layoutX="77.0" layoutY="83.0" prefHeight="80.0" prefWidth="91.0" textFill="#fcf5f5">
+         <font>
+            <Font name="System Bold Italic" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="45.0" prefHeight="30.0" prefWidth="106.0" text="Total Customers" textFill="#fffbfb">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2392dc" height="120.0" layoutX="218.0" layoutY="45.0" stroke="BLACK" strokeType="INSIDE" width="144.0" />
+      <Label fx:id="todayOrderlbl" layoutX="250.0" layoutY="85.0" prefHeight="80.0" prefWidth="91.0" textAlignment="CENTER" textFill="#fcf5f5">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="221.0" layoutY="48.0" prefHeight="30.0" prefWidth="106.0" text="Today's Orders" textFill="#fffbfb">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#db4b23" height="120.0" layoutX="387.0" layoutY="45.0" stroke="BLACK" strokeType="INSIDE" width="144.0" />
+      <Label layoutX="391.0" layoutY="48.0" prefHeight="30.0" prefWidth="106.0" text="Today's Sale" textFill="#fffbfb">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="todaySaleslbl" layoutX="391.0" layoutY="83.0" prefHeight="80.0" prefWidth="138.0" textFill="#fcf5f5">
+         <font>
+            <Font name="System Bold" size="30.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

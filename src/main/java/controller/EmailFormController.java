@@ -33,12 +33,12 @@ public class EmailFormController {
         properties.put("mail.smtp.port","587");
 
         String myMail = "sandakelum1456@gmail.com";
-        String password = "ngvu polp apsc fzdf";
+        String passkey = "ngvu polp apsc fzdf";
 
         Session session = Session.getInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(myMail,password);
+                return new PasswordAuthentication(myMail,passkey);
             }
         });
         Message message = prepareMessage(session,myMail,email,msg);

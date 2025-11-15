@@ -78,7 +78,7 @@ public class OrderServiceImpl implements OrderService {
         return repository.deleteVoucher(id);
     }
 
-    List<Order> getAll() throws SQLException {
+    public List<Order> getAll() throws SQLException {
         return repository.getAll();
     }
 

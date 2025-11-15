@@ -96,7 +96,7 @@ public class FinalDashBoardController implements Initializable {
     public void DashBtnOnAction(ActionEvent actionEvent) throws IOException {
         MainLiable.setText("Email Form");
 
-        Parent load = FXMLLoader.load(getClass().getResource("../view/EmailForm.fxml"));
+        Parent load = FXMLLoader.load(getClass().getResource("../view/DashBoard.fxml"));
         assert root!=null;
         root.getChildren().clear();
         root.getChildren().add(load);
