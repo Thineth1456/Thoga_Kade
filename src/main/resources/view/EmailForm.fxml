@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="503.0" prefWidth="647.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmailFormController">
+<AnchorPane prefHeight="522.0" prefWidth="567.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.EmailFormController">
    <children>
-      <JFXTextArea fx:id="txtMsg" layoutX="75.0" layoutY="97.0" promptText="Enter your massage" />
-      <JFXTextField fx:id="txtEmail" layoutX="80.0" layoutY="354.0" prefHeight="26.0" prefWidth="347.0" promptText="Enter Email" />
-      <JFXButton layoutX="510.0" layoutY="438.0" onAction="#sendBtnOnAction" prefHeight="26.0" prefWidth="58.0" ripplerFill="#4d1989" text="Send" />
+      <JFXTextArea fx:id="txtMsg" layoutX="80.0" layoutY="75.0" prefHeight="212.0" prefWidth="466.0" promptText="Enter your massage" stylesheets="@../css/dele_add__style.css" />
+      <JFXTextField fx:id="txtEmail" layoutX="80.0" layoutY="354.0" prefHeight="26.0" prefWidth="347.0" promptText="Enter Email" stylesheets="@../css/dele_add__style.css" />
+      <JFXButton fx:id="sendBtn" layoutX="470.0" layoutY="453.0" onAction="#sendBtnOnAction" prefHeight="40.0" prefWidth="76.0" ripplerFill="#4d1989" stylesheets="@../css/dele_add__style.css" text="Send" />
+      <JFXComboBox fx:id="combCusId" layoutX="451.0" layoutY="354.0" prefHeight="26.0" prefWidth="87.0" promptText="Customer Id" stylesheets="@../css/dele_add__style.css" />
    </children>
 </AnchorPane>

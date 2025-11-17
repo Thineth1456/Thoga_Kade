@@ -1,6 +1,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXTextField;
+import db.DBConnection;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +12,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.Customer;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import service.ServiceFactory;
 import service.ServiceFactory1;
 import service.custom.CustomerService;
@@ -20,6 +25,8 @@ import util.serviceType;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class CustomerFormController implements Initializable {
@@ -56,26 +63,36 @@ public class CustomerFormController implements Initializable {
 
     @FXML
     void addButtonOnAction(ActionEvent event) {
-        try {
-            Customer c1 = new Customer(lblCustomerId.getText(),
-                    cusName.getText(),
-                    cusAddress.getText(),
-                    cusEmail.getText());
-            service.save(c1);
-            System.out.println(c1);
-            new Alert(Alert.AlertType.ERROR,"Customer Added Successful");
-        } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR,"Customer Added Not Successfully");
-        }
-        loadTable();
+       if(!cusName.getText().isEmpty()&&!cusAddress.getText().isEmpty()&&!cusEmail.getText().isEmpty()){
+           try {
+               Customer c1 = new Customer(lblCustomerId.getText(),
+                       cusName.getText(),
+                       cusAddress.getText(),
+                       cusEmail.getText());
+               service.save(c1);
+               System.out.println(c1);
+               new Alert(Alert.AlertType.ERROR,"Customer Added Successful").show();
+           } catch (SQLException e) {
+               new Alert(Alert.AlertType.ERROR,"Customer Added Not Successfully").show();
+           }
+           loadTable();
 
-        try {
-            lblCustomerId.setText(service.generateCustomerId());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+           try {
+               lblCustomerId.setText(service.generateCustomerId());
+           } catch (SQLException e) {
+               throw new RuntimeException(e);
+           }
+           new Alert(Alert.AlertType.INFORMATION,"Added Success").show();
+       }else {
+           new Alert(Alert.AlertType.ERROR,"Added Not Success").show();
+           cusName.setText("");
+           cusAddress.setText("");
+           cusEmail.setText("");
+       }
 
     }
+
+
 
     @FXML
     void deleteButtonOnAction(ActionEvent event) {
@@ -110,15 +127,22 @@ public class CustomerFormController implements Initializable {
 
     @FXML
     void updateButtonOnAction(ActionEvent event) {
-        try {
-            service.update(new Customer(cusId.getText(),
-                                        cusName.getText(),
-                                        cusAddress.getText(),
-                                        cusEmail.getText()));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if(!cusName.getText().isEmpty()&&!cusAddress.getText().isEmpty()&&!cusEmail.getText().isEmpty()&&!cusId.getText().isEmpty()){
+            try {
+                service.update(new Customer(cusId.getText(),
+                        cusName.getText(),
+                        cusAddress.getText(),
+                        cusEmail.getText()));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            loadTable();
+            new Alert(Alert.AlertType.INFORMATION,"Update Success").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR,"Update Not Success").show();
         }
-        loadTable();
+
+
     }
     CustomerService service = ServiceFactory.getInstance().getFactory(ServiceEnum.CUSTOMER);;
     //CustomerService service = ServiceFactory.getInstance().getFactory(ServiceEnum.CUSTOMER);

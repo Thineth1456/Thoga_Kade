@@ -49,7 +49,7 @@ public class FinalDashBoardController implements Initializable {
     @FXML
     void cusBtnOnAction(ActionEvent event) throws IOException {
         MainLiable.setText("Customer Form");
-        Parent load = FXMLLoader.load(getClass().getResource("../view/customerForm.fxml"));
+        Parent load = FXMLLoader.load(getClass().getResource("/view/customerForm.fxml"));
         assert root != null;
         root.getChildren().clear();
         root.getChildren().add(load);
@@ -58,7 +58,7 @@ public class FinalDashBoardController implements Initializable {
     @FXML
     void itmBtnOnAction(ActionEvent event) throws IOException {
         MainLiable.setText("Item Form");
-        Parent load = FXMLLoader.load(getClass().getResource("../view/ItemForm.fxml"));
+        Parent load = FXMLLoader.load(getClass().getResource("/view/ItemForm.fxml"));
         assert root!= null;
         root.getChildren().clear();
         root.getChildren().add(load);
@@ -71,7 +71,7 @@ public class FinalDashBoardController implements Initializable {
     public void orderBtnOnAction(ActionEvent actionEvent) throws IOException {
         MainLiable.setText("Order Form");
 
-        Parent load = FXMLLoader.load(getClass().getResource("../view/orderForm.fxml"));
+        Parent load = FXMLLoader.load(getClass().getResource("/view/orderForm.fxml"));
         assert  root!= null;
         root.getChildren().clear();
         root.getChildren().add(load);
@@ -94,9 +94,9 @@ public class FinalDashBoardController implements Initializable {
     }
 
     public void DashBtnOnAction(ActionEvent actionEvent) throws IOException {
-        MainLiable.setText("Email Form");
+        MainLiable.setText("DashBoard Form");
 
-        Parent load = FXMLLoader.load(getClass().getResource("../view/DashBoard.fxml"));
+        Parent load = FXMLLoader.load(getClass().getResource("/view/DashBoard.fxml"));
         assert root!=null;
         root.getChildren().clear();
         root.getChildren().add(load);
@@ -117,5 +117,14 @@ public class FinalDashBoardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadDateAndTime();
+    }
+
+    public void emailBtnOnAction(ActionEvent actionEvent) throws IOException {
+        MainLiable.setText("Email Form");
+
+        Parent load = FXMLLoader.load(getClass().getResource("/view/EmailForm.fxml"));
+        assert root!=null;
+        root.getChildren().clear();
+        root.getChildren().add(load);
     }
 }

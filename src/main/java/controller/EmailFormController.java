@@ -1,22 +1,34 @@
 package controller;
 
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import com.sun.javafx.logging.PlatformLogger;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import model.Customer;
+import service.ServiceFactory;
+import service.custom.CustomerService;
+import util.ServiceEnum;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.net.URL;
+import java.sql.SQLException;
 import java.util.Properties;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class EmailFormController {
+public class EmailFormController implements Initializable {
+
+    CustomerService customerService = ServiceFactory.getInstance().getFactory(ServiceEnum.CUSTOMER);
 
     public JFXTextArea txtMsg;
     public JFXTextField txtEmail;
+    public JFXComboBox combCusId;
 
     public void sendBtnOnAction(ActionEvent actionEvent) throws MessagingException {
         String msg = txtMsg.getText();
@@ -64,5 +76,30 @@ public class EmailFormController {
             Logger.getLogger(EmailFormController.class.getName()).log(Level.SEVERE,null,e);
         }
         return null;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            combCusId.setItems(FXCollections.observableArrayList(customerService.getCustomerIds()));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        combCusId.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue!=null){
+                getEmail((String)newValue);
+            }
+        });
+    }
+
+    private void getEmail(String newValue) {
+        try {
+            Customer customer = customerService.search(newValue);
+            txtEmail.setText(customer.getEmail());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }

@@ -5,11 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.Item;
 import service.ServiceFactory;
@@ -70,14 +66,19 @@ public class ItemFormController implements Initializable {
     ItemService service = ServiceFactory.getInstance().getFactory(ServiceEnum.ITEM);
     @FXML
     void addButtonOnAction(ActionEvent event) {
-        try {
-            service.save(new Item(txtId.getText(),
-                    txtName.getText(),
-                    Double.parseDouble(txtUnitPrice.getText()),
-                    Integer.parseInt(txtQuantity.getText()))
-            );
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if(!txtId.getText().isEmpty()&&!txtName.getText().isEmpty()&&!txtQuantity.getText().isEmpty()&&!txtUnitPrice.getText().isEmpty()){
+            try {
+                service.save(new Item(txtId.getText(),
+                        txtName.getText(),
+                        Double.parseDouble(txtUnitPrice.getText()),
+                        Integer.parseInt(txtQuantity.getText()))
+                );
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            new Alert(Alert.AlertType.INFORMATION,"Added Success").show();
+        }else{
+            new Alert(Alert.AlertType.ERROR,"Added Not Success").show();
         }
 
     }
@@ -115,11 +116,18 @@ public class ItemFormController implements Initializable {
     }
 
     public void updateButtonOnAction(ActionEvent actionEvent) {
-        try {
-            service.update(new Item(txtId.getText(),txtName.getText(),Double.parseDouble(txtUnitPrice.getText()),Integer.parseInt(txtQuantity.getText())));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        if(!txtId.getText().isEmpty()&&!txtName.getText().isEmpty()&&!txtQuantity.getText().isEmpty()&&!txtUnitPrice.getText().isEmpty()){
+            try {
+                service.update(new Item(txtId.getText(),txtName.getText(),Double.parseDouble(txtUnitPrice.getText()),Integer.parseInt(txtQuantity.getText())));
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            new Alert(Alert.AlertType.INFORMATION,"Update Success").show();
+        }else {
+            new Alert(Alert.AlertType.INFORMATION,"Update Not Success").show();
         }
+
+
     }
 
     public void deleteBtnButtonOnAction(ActionEvent actionEvent) {

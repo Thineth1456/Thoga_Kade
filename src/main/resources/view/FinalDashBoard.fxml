@@ -37,7 +37,7 @@
             <Font name="System Bold" size="15.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="aboutUsBtn" layoutX="51.0" layoutY="461.0" onAction="#aboutUsBtnOnAction" prefHeight="31.0" prefWidth="134.0" stylesheets="@../css/style1.css" text="About us" textFill="WHITE">
+      <JFXButton layoutX="51.0" layoutY="461.0" onAction="#emailBtnOnAction" prefHeight="31.0" prefWidth="134.0" stylesheets="@../css/style1.css" text="Email" textFill="WHITE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -57,6 +57,11 @@
             <Image url="@../Images/shop.png" />
          </image>
       </ImageView>
+      <JFXButton fx:id="aboutUsBtn" layoutX="50.0" layoutY="516.0" onAction="#aboutUsBtnOnAction" prefHeight="31.0" prefWidth="134.0" stylesheets="@../css/style1.css" text="About us" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
     </children>
 
 

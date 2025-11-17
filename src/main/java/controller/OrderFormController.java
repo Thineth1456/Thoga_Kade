@@ -3,8 +3,8 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import db.DBConnection;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,20 +15,19 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.*;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import service.ServiceFactory;
-import service.SuperService;
 import service.custom.CustomerService;
 import service.custom.ItemService;
 import service.custom.OrderService;
-import service.custom.impl.CustomerServiceImpl;
 import util.ServiceEnum;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class OrderFormController implements Initializable {
 
@@ -140,6 +139,7 @@ public class OrderFormController implements Initializable {
         try {
             if (orderService.placeOrder(order)){
                 new Alert(Alert.AlertType.INFORMATION,"Order Completed").show();
+                generateBill(orderDetails,customerId,orderIds);
             }
             else {
                 new Alert(Alert.AlertType.ERROR,"Order Not Completed").show();
@@ -285,6 +285,58 @@ public class OrderFormController implements Initializable {
         }
         lblNetPrice.setText(netTotal.toString());
         voucherId = value;
+    }
+
+    private void generateBill(ArrayList<OrderDetail> orderDetails, String customerId, String orderIds) {
+        try {
+            JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/orderForm2.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            Map<String, Object> idPara = new HashMap<>();
+            idPara.put("orderId", orderIds);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, idPara, DBConnection.getInstance().getConnection());
+            Map<String, Object> orderId = new HashMap<>();
+            orderId.put("customerId",customerId );
+            jasperPrint = JasperFillManager.fillReport(jasperReport, orderId, DBConnection.getInstance().getConnection());
+            jasperPrint = JasperFillManager.fillReport(jasperReport, orderId, DBConnection.getInstance().getConnection());
+
+
+            orderDetails.forEach(order->{
+
+            });
+            double total = 0;
+            for(int i=0;i<orderDetails.size();i++){
+                Map<String, Object> description = new HashMap<>();
+                description.put("productName",itmService.search(orderDetails.get(1).getItemCode()).getDescription() );
+                jasperPrint = JasperFillManager.fillReport(jasperReport, description, DBConnection.getInstance().getConnection());
+
+                description = new HashMap<>();
+                description.put("quantity",orderDetails.get(i).getQty());
+                jasperPrint = JasperFillManager.fillReport(jasperReport, description, DBConnection.getInstance().getConnection());
+
+                description = new HashMap<>();
+                description.put("unitPrice",orderDetails.get(i).getUnitPrice());
+                jasperPrint = JasperFillManager.fillReport(jasperReport, description, DBConnection.getInstance().getConnection());
+
+                double amount = orderDetails.get(i).getQty()*orderDetails.get(i).getUnitPrice();
+
+                description = new HashMap<>();
+                description.put("amount",amount);
+                jasperPrint = JasperFillManager.fillReport(jasperReport, description, DBConnection.getInstance().getConnection());
+                total +=amount;
+            }
+            Map<String, Object>description = new HashMap<>();
+            description.put("amount",total);
+            jasperPrint = JasperFillManager.fillReport(jasperReport, description, DBConnection.getInstance().getConnection());
+
+
+            JasperExportManager.exportReportToPdfFile(jasperPrint,"bill.pdf");
+            JasperViewer.viewReport(jasperPrint,false);
+
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

@@ -1,5 +1,7 @@
 package controller;
 
+import db.DBConnection;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -7,6 +9,10 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import model.Order;
 import model.OrderDetail;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 import repository.custom.ItemRepository;
 import service.ServiceFactory;
 import service.custom.CustomerService;
@@ -93,5 +99,20 @@ public class DashBoardController implements Initializable {
         todaySaleslbl.setText(totalSale.toString());
 
 
+    }
+
+    public void generateBtnOnAction(ActionEvent actionEvent) {
+        try {
+            JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/All_Customers.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, DBConnection.getInstance().getConnection());
+            JasperExportManager.exportReportToPdfFile(jasperPrint,"customer_report-2025.pdf");
+            JasperViewer.viewReport(jasperPrint,false);
+
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

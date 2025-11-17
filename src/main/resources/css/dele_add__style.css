@@ -222,3 +222,79 @@
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }
+
+/* ===========================
+   TEXT AREA – Message Box
+   ID: txtMsg
+   =========================== */
+#txtMsg {
+    -fx-background-color: linear-gradient(to bottom, #192a56, #273c75);
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: rgba(0, 168, 255, 0.3);
+    -fx-prompt-text-fill: rgba(255,255,255,0.6);
+}
+#txtMsg:focused {
+    -fx-border-color: #00a8ff;
+}
+
+
+
+/* ===========================
+   TEXT FIELD – Email Input
+   ID: txtEmail
+   =========================== */
+#txtEmail {
+    -fx-background-color: linear-gradient(to right, #0984e3, #74b9ff);
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-border-color: rgba(255,255,255,0.2);
+    -fx-prompt-text-fill: rgba(255,255,255,0.7);
+}
+#txtEmail:focused {
+    -fx-border-color: #81ecec;
+}
+
+
+
+/* ===========================
+   COMBO BOX – Customer ID
+   ID: combCusId
+   =========================== */
+#combCusId {
+    -fx-background-color: linear-gradient(to right, #4b7bec, #3867d6);
+    -fx-text-fill: white;
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+    -fx-border-color: rgba(255,255,255,0.15);
+    -fx-prompt-text-fill: rgba(255,255,255,0.6);
+}
+#combCusId:focused {
+    -fx-border-color: #a29bfe;
+}
+#combCusId .arrow {
+    -fx-background-color: #a29bfe;
+}
+
+
+/* ===========================
+   SEND BUTTON
+   ID: sendBtn
+   =========================== */
+#sendBtn {
+    -fx-background-color: linear-gradient(to right, #00a8ff, #40739e);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 12px;
+    -fx-border-radius: 12px;
+    -fx-padding: 10px 20px;
+}
+#sendBtn:hover {
+    -fx-background-color: linear-gradient(to right, #74b9ff, #0984e3);
+}
+#sendBtn:pressed {
+    -fx-background-color: #273c75;
+}
+
