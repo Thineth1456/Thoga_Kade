@@ -288,55 +288,7 @@ public class OrderFormController implements Initializable {
     }
 
     private void generateBill(ArrayList<OrderDetail> orderDetails, String customerId, String orderIds) {
-        try {
-            JasperDesign jasperDesign = JRXmlLoader.load("src/main/resources/reports/orderForm2.jrxml");
-            JasperReport jasperReport = JasperCompileManager.compileReport(jasperDesign);
-            Map<String, Object> idPara = new HashMap<>();
-            idPara.put("orderId", orderIds);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, idPara, DBConnection.getInstance().getConnection());
-            Map<String, Object> orderId = new HashMap<>();
-            orderId.put("customerId",customerId );
-            jasperPrint = JasperFillManager.fillReport(jasperReport, orderId, DBConnection.getInstance().getConnection());
-            jasperPrint = JasperFillManager.fillReport(jasperReport, orderId, DBConnection.getInstance().getConnection());
 
-
-            orderDetails.forEach(order->{
-
-            });
-            double total = 0;
-            for(int i=0;i<orderDetails.size();i++){
-                Map<String, Object> description = new HashMap<>();
-                description.put("productName",itmService.search(orderDetails.get(1).getItemCode()).getDescription() );
-                jasperPrint = JasperFillManager.fillReport(jasperReport, description, DBConnection.getInstance().getConnection());
-
-                description = new HashMap<>();
-                description.put("quantity",orderDetails.get(i).getQty());
-                jasperPrint = JasperFillManager.fillReport(jasperReport, description, DBConnection.getInstance().getConnection());
-
-                description = new HashMap<>();
-                description.put("unitPrice",orderDetails.get(i).getUnitPrice());
-                jasperPrint = JasperFillManager.fillReport(jasperReport, description, DBConnection.getInstance().getConnection());
-
-                double amount = orderDetails.get(i).getQty()*orderDetails.get(i).getUnitPrice();
-
-                description = new HashMap<>();
-                description.put("amount",amount);
-                jasperPrint = JasperFillManager.fillReport(jasperReport, description, DBConnection.getInstance().getConnection());
-                total +=amount;
-            }
-            Map<String, Object>description = new HashMap<>();
-            description.put("amount",total);
-            jasperPrint = JasperFillManager.fillReport(jasperReport, description, DBConnection.getInstance().getConnection());
-
-
-            JasperExportManager.exportReportToPdfFile(jasperPrint,"bill.pdf");
-            JasperViewer.viewReport(jasperPrint,false);
-
-        } catch (JRException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
 }
 
