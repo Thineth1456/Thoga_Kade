@@ -16,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.*;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
 import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
@@ -288,7 +289,19 @@ public class OrderFormController implements Initializable {
     }
 
     private void generateBill(ArrayList<OrderDetail> orderDetails, String customerId, String orderIds) {
+        try {
+            JasperDesign design = JRXmlLoader.load("src/main/resources/reports/Blank_A4_3I.jrxml");
+            Map<String, Object> params = new HashMap<>();
+            params.put("orderIds", orderIds);
+            JasperReport jasperReport = JasperCompileManager.compileReport(design);
 
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, params, DBConnection.getInstance().getConnection());
+            JasperViewer.viewReport(jasperPrint,false);
+        } catch (JRException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
